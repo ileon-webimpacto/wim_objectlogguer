@@ -3,7 +3,7 @@
 	<name>wim_objectlogguer</name>
 	<displayName><![CDATA[wim_objectlogguer]]></displayName>
 	<version><![CDATA[1.0.0]]></version>
-	<description><![CDATA[Primer modulo]]></description>
+	<description><![CDATA[Primer Modulo]]></description>
 	<author><![CDATA[Irene Le&oacute;n]]></author>
 	<tab><![CDATA[administration]]></tab>
 	<is_configurable>0</is_configurable>
