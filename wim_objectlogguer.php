@@ -71,3 +71,4 @@ public function install() {
         $this->annadirAccion($params, "delete");
     }
 } 
+?>
