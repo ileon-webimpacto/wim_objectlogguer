@@ -25,13 +25,13 @@
 */
 
 require_once 'classes/ObjectLogger.php';
-if (!defined('_PS_VERSION_')){
+if (!defined('_PS_VERSION_')) {
     exit;
 }
 
 class WimObjectlogguer extends Module
 {
-    public function __construct() 
+    public function __construct()
     {
         $this->name = 'wim_objectlogguer';
         $this->tab = 'administration';
@@ -46,9 +46,9 @@ class WimObjectlogguer extends Module
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
 
         parent::__construct();
-}
+    }
 
-    public function install() 
+    public function install()
     {
         Db::getInstance()->execute(
             "CREATE TABLE IF NOT EXISTS `"._DB_PREFIX_."objectlogguer`(
@@ -70,17 +70,17 @@ class WimObjectlogguer extends Module
             && $this->registerHook('actionObjectUpdateAfter');
     }
 
-    public function annadirAccion($params, $event) 
+    public function annadirAccion($params, $event)
     {
         $accion = new ObjectLogger();
         $accion->affected_object = $params['object']->id;
         $accion->action_type = $event;
         $accion->object_type = get_class($params['object']);
         if ($event == "update" || $event == "delete") {
-            $accion->message = "Object ". get_class($params['object']) 
+            $accion->message = "Object ". get_class($params['object'])
             . " with id " . $params['object']->id . " was $event" ."d";
         } else {
-            $accion->message = "Object ". get_class($params['object']) 
+            $accion->message = "Object ". get_class($params['object'])
             . " with id " . $params['object']->id . " was $event" ."ed";
         }
         $accion->date_add = date("Y-m-d H:i:s");
