@@ -25,9 +25,10 @@
 */
 
 require_once 'classes/ObjectLogger.php';
-if(!defined('_PS_VERSION_'))
+if (!defined('_PS_VERSION_'))
 exit;
-class wim_objectlogguer extends Module{
+class wim_objectlogguer extends Module
+{
   public function __construct() {
     $this->name = 'wim_objectlogguer';
     $this->tab = 'administration';
@@ -70,13 +71,13 @@ public function install() {
         $accion->affected_object = $params['object']->id;
         $accion->action_type = $event;
         $accion->object_type = get_class($params['object']);
-        if($event == "update" || $event == "delete") {
+        if ($event == "update" || $event == "delete") {
             $accion->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " was $event" ."d";
         }else {
             $accion->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " was $event" ."ed";
         }
         $accion->date_add = date("Y-m-d H:i:s");
-        if(get_class($params['object']) != "ObjectLogger"){
+        if (get_class($params['object']) != "ObjectLogger"){
             $accion->add();
         }
     }
