@@ -103,4 +103,4 @@ class WimObjectlogguer extends Module
     {
         $this->annadirAccion($params, "delete");
     }
-} 
+}
