@@ -29,24 +29,24 @@ if (!defined('_PS_VERSION_'))
 exit;
 class wim_objectlogguer extends Module
 {
-  public function __construct() {
-    $this->name = 'wim_objectlogguer';
-    $this->tab = 'administration';
-    $this->version = '1.0.0';
-    $this->author = 'Irene León';
-    $this->need_instance = 0;
-    
-    $this->bootstrap = true;
+    public function __construct() {
+        $this->name = 'wim_objectlogguer';
+        $this->tab = 'administration';
+        $this->version = '1.0.0';
+        $this->author = 'Irene León';
+        $this->need_instance = 0;
 
-    $this->displayName = $this->l('wim_objectlogguer');
-    $this->description = $this->l('Primer Modulo');
-    $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+        $this->bootstrap = true;
 
-    parent::__construct();
+        $this->displayName = $this->l('wim_objectlogguer');
+        $this->description = $this->l('Primer Modulo');
+        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+
+        parent::__construct();
 }
 
-public function install() {
-    Db::getInstance()->execute(
+    public function install() {
+        Db::getInstance()->execute(
         "CREATE TABLE IF NOT EXISTS `"._DB_PREFIX_."objectlogguer`(
             `id_objectlogguer` int(11) AUTO_INCREMENT,
             `affected_object` int(11),
@@ -58,7 +58,7 @@ public function install() {
         ) ENGINE="._MYSQL_ENGINE_."DEFAULT CHARSET=UTF8;"
     );
 
-    return parent::install()
+        return parent::install()
             && $this->registerHook('header')
             && $this->registerHook('backOfficeHeader') 
             && $this->registerHook('actionObjectAddAfter')
