@@ -29,7 +29,8 @@ if (!defined('_PS_VERSION_'))
 exit;
 class wim_objectlogguer extends Module
 {
-    public function __construct() {
+    public function __construct() 
+    {
         $this->name = 'wim_objectlogguer';
         $this->tab = 'administration';
         $this->version = '1.0.0';
@@ -45,9 +46,10 @@ class wim_objectlogguer extends Module
         parent::__construct();
 }
 
-    public function install() {
+    public function install() 
+    {
         Db::getInstance()->execute(
-        "CREATE TABLE IF NOT EXISTS `"._DB_PREFIX_."objectlogguer`(
+            "CREATE TABLE IF NOT EXISTS `"._DB_PREFIX_."objectlogguer`(
             `id_objectlogguer` int(11) AUTO_INCREMENT,
             `affected_object` int(11),
             `action_type` varchar(255),
@@ -56,7 +58,7 @@ class wim_objectlogguer extends Module
             `date_add` datetime,
             PRIMARY KEY (`id_objectlogguer`)
         ) ENGINE="._MYSQL_ENGINE_."DEFAULT CHARSET=UTF8;"
-    );
+        );
 
         return parent::install()
             && $this->registerHook('header')
@@ -66,7 +68,8 @@ class wim_objectlogguer extends Module
             && $this->registerHook('actionObjectUpdateAfter');
     }
 
-    public function annadirAccion($params, $event) {
+    public function annadirAccion($params, $event) 
+    {
         $accion = new ObjectLogger();
         $accion->affected_object = $params['object']->id;
         $accion->action_type = $event;
