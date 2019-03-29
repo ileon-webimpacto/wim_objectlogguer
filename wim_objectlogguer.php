@@ -25,9 +25,11 @@
 */
 
 require_once 'classes/ObjectLogger.php';
-if (!defined('_PS_VERSION_'))
-exit;
-class wim_objectlogguer extends Module
+if (!defined('_PS_VERSION_')){
+    exit;
+}
+
+class WimObjectlogguer extends Module
 {
     public function __construct() 
     {
@@ -62,7 +64,7 @@ class wim_objectlogguer extends Module
 
         return parent::install()
             && $this->registerHook('header')
-            && $this->registerHook('backOfficeHeader') 
+            && $this->registerHook('backOfficeHeader')
             && $this->registerHook('actionObjectAddAfter')
             && $this->registerHook('actionObjectDeleteAfter')
             && $this->registerHook('actionObjectUpdateAfter');
@@ -75,12 +77,14 @@ class wim_objectlogguer extends Module
         $accion->action_type = $event;
         $accion->object_type = get_class($params['object']);
         if ($event == "update" || $event == "delete") {
-            $accion->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " was $event" ."d";
-        }else {
-            $accion->message = "Object ". get_class($params['object']) . " with id " . $params['object']->id . " was $event" ."ed";
+            $accion->message = "Object ". get_class($params['object']) 
+            . " with id " . $params['object']->id . " was $event" ."d";
+        } else {
+            $accion->message = "Object ". get_class($params['object']) 
+            . " with id " . $params['object']->id . " was $event" ."ed";
         }
         $accion->date_add = date("Y-m-d H:i:s");
-        if (get_class($params['object']) != "ObjectLogger"){
+        if (get_class($params['object']) != "ObjectLogger") {
             $accion->add();
         }
     }
@@ -100,4 +104,3 @@ class wim_objectlogguer extends Module
         $this->annadirAccion($params, "delete");
     }
 } 
-?>
